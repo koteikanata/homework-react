@@ -36,19 +36,19 @@ export const Rating: React.FC<Props> = ({ onChange, rating = 0 }) => {
         stars.push(
             <label
                 key={i + 1}
-                className={classNames(styles.item)}
+                className={styles.item}
                 onMouseEnter={() => setHoveredItem(i)}
                 onMouseLeave={() => setHoveredItem(undefined)}
             >
                 <input
-                    className={classNames(styles.input)}
+                    className={styles.input}
                     type="radio"
                     name="star"
                     value={i + 1}
                     onChange={() => setInnerRating(i + 1)}
                 />
                 <span className={styles.icon}>{icon}</span>
-                <span className={classNames(styles.text)}>{i + 1}</span>
+                <span className={styles.text}>{i + 1}</span>
             </label>,
         );
     }

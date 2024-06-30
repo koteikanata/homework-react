@@ -10,7 +10,7 @@ interface Props {
 
 export const Pagination: React.FC<Props> = ({ page, prevLink, nextLink }) => {
     return (
-        <footer className={classNames(styles.footer)}>
+        <footer className={styles.footer}>
             {prevLink ? (
                 <Link
                     to={prevLink}

@@ -2,8 +2,14 @@ import { createPortal } from 'react-dom';
 
 import styles from './styles.module.css';
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 
-export const Modal = ({ children, onClose }) => {
+interface Props {
+    children: ReactNode,
+    onClose: () => void
+}
+
+export const Modal: React.FC<Props> = ({ children, onClose }) => {
     return createPortal(
         <>
             <div

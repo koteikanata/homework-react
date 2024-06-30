@@ -35,8 +35,8 @@ export const Header = () => {
     }
 
     return (
-        <header className={classNames(styles.header)}>
-            <h1 className={classNames(styles.title)} onClick={handleTitleClick}>
+        <header className={styles.header}>
+            <h1 className={styles.title} onClick={handleTitleClick}>
                 Фильмопоиск
             </h1>
             {!isAuthenticated ? (

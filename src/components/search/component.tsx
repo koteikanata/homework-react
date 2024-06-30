@@ -23,11 +23,11 @@ export const Search: React.FC<SearchProps> = ({
     };
 
     return (
-        <div className={classNames(styles.container)}>
-            <div className={classNames(styles['input-container'])}>
+        <div className={styles.container}>
+            <div className={styles['input-container']}>
                 <input
                     type="text"
-                    className={classNames(styles.input)}
+                    className={styles.input}
                     placeholder="Название фильма"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}

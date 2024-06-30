@@ -7,16 +7,16 @@ export const Filter = () => {
         <div className={classNames(styles['filter-card'])}>
             <p className={styles.title}>Фильтр</p>
 
-            <div className={classNames(styles.body)}>
-                <div className={classNames(styles.item)}>
+            <div className={styles.body}>
+                <div className={styles.item}>
                     <p>Жанр</p>
-                    <div className={classNames(styles.select)}>
+                    <div className={styles.select}>
                         Выберите жанр
                     </div>
                 </div>
-                <div className={classNames(styles.item)}>
+                <div className={styles.item}>
                     <p>Год выпуска</p>
-                    <div className={classNames(styles.select)}>
+                    <div className={styles.select}>
                         {' '}
                         Выберите год
                     </div>
