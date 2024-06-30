@@ -1,0 +1,46 @@
+.input {
+    width: 328px;
+    border-radius: 8px;
+    padding: 12px 36px;
+    border: #ffffff solid 1px;
+}
+
+.container {
+    position: relative;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container::before {
+    content: url(../../../public/search.svg);
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.input::placeholder {
+    color: #999fa6;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.input:hover {
+    border: #ced2d6 solid 1px;
+}
+
+.input:focus {
+    outline: #ff5500 1px;
+    border: #ff5500 solid 1px;
+}
+
+.clear {
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    left: 373px;
+    width: 16px;
+    height: 16px;
+}

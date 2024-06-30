@@ -1,0 +1,64 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.input-name {
+    padding-bottom: 4px;
+}
+
+.input-name > span {
+    color: #f04075;
+}
+
+.input {
+    font-size: 14px;
+    line-height: 16px;
+    border: #e1e3e6 1px solid;
+    border-radius: 8px;
+    width: 270px;
+    height: 40px;
+    padding: 0px 12px;
+}
+
+.input:hover {
+    outline: #ced2d6 1px;
+    border: #ced2d6 solid 1px;
+}
+
+.input:focus {
+    outline: #ff5500 1px;
+    border: #ff5500 solid 1px;
+}
+
+.input::placeholder {
+    color: #ababab;
+}
+
+.button-container {
+    display: flex;
+    gap: 8px;
+}
+
+.button {
+    height: 40px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.button-login {
+    background-color: #ff5500;
+    color: #ffffff;
+    width: 72px;
+}
+
+.button-cancel {
+    background-color: #ffffff;
+    border: #ff5500 solid 1px;
+    color: #ff5500;
+    width: 98px;
+}

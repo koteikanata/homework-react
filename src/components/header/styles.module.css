@@ -1,0 +1,55 @@
+.header {
+    background-color: #333333;
+    position: sticky;
+    top: 0;
+    color: white;
+    display: flex;
+    padding: 0px 15px 0px 32px;
+    height: 88px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 4;
+}
+
+.title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.button {
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.button-login {
+    background-color: #ff5500;
+    color: #ffffff;
+    width: 72px;
+}
+
+.button-logout {
+    background-color: #333333;
+    border: 1px solid #ff5500;
+    color: #ff5500;
+    width: 76px;
+}
+
+.logedin-container {
+    display: flex;
+    gap: 16px;
+}
+
+.avatar {
+    background-image: url(../../../public/avatar.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}

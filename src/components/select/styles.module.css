@@ -1,0 +1,61 @@
+.select {
+    position: relative;
+}
+
+.input {
+    padding: 10px 44px 10px 16px;
+    border: 1px solid #e1e3e6;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.input_empty {
+    color: #999fa6;
+}
+
+.input_active {
+    border-color: #ff5500;
+}
+
+.input::before {
+    content: url(../../assets/icons/arrow-square-up.svg);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 16px;
+    bottom: 0;
+    margin: auto;
+    transform: rotate(180deg);
+}
+
+.input_active::before {
+    transform: rotate(0);
+}
+
+.popup {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 4px);
+    font-size: 14px;
+    line-height: 20px;
+    background: #fff;
+    box-shadow: 0px 10px 22px -4px #1b1f231f;
+    border-radius: 8px;
+}
+
+.list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.item {
+    padding: 12px 12px 10px 12px;
+    cursor: pointer;
+}
+
+.item:hover {
+    color: #ff5500;
+}

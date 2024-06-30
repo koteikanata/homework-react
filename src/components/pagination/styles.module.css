@@ -1,0 +1,31 @@
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 4px 0px #0000004d;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.button:disabled {
+    background-color: #e9eaed;
+    cursor: default;
+    background-image: url(../../../public/arrow-pag-disabled.svg);
+}
+
+.button:not(:disabled) {
+    background-image: url(../../../public/arrow-pag.svg);
+}
+
+.button_rotated {
+    transform: scale(-1, 1);
+}
