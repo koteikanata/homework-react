@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import { Auth } from '../auth/component';
-import type { RootState } from '../../store/store';
 import { logout, setTokenFromStorage } from '../../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { RootState } from '../../store/store';
 
 export const Header = () => {
     const navigate = useNavigate();

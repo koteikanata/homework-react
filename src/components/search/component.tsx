@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 import styles from './styles.module.css';
 import { useDebounce } from '../../hooks';
-
-import ClearSearch from '../../assets/clear-search.svg?react';
 
 interface SearchProps {
     onChange: (query: string) => void;
     debounceDelay?: number;
 }
 
-const clearSearchIcon = <ClearSearch />;
-
 export const Search: React.FC<SearchProps> = ({ onChange, debounceDelay = 300 }) => {
     const [query, setQuery] = useState('');
-    const value = useDebounce(query, debounceDelay);
+    const debouncedQuery = useDebounce(query, debounceDelay);
 
-    useEffect(() => onChange(value), [onChange, value]);
+    useEffect(() => onChange(debouncedQuery), [onChange, debouncedQuery]);
 
     const handleClearSearch = () => {
         setQuery('');
@@ -24,7 +21,7 @@ export const Search: React.FC<SearchProps> = ({ onChange, debounceDelay = 300 })
 
     return (
         <div className={styles.container}>
-            <div className={styles['input-container']}>
+            <div className={classNames(styles['input-container'])}>
                 <input
                     type="text"
                     className={styles.input}
@@ -33,9 +30,12 @@ export const Search: React.FC<SearchProps> = ({ onChange, debounceDelay = 300 })
                     onChange={(e) => setQuery(e.target.value)}
                 />
                 {query && (
-                    <div className={styles.clear} onClick={handleClearSearch}>
-                        {clearSearchIcon}
-                    </div>
+                    <img
+                        src="./src/assets/clear-search.svg"
+                        alt="Очистить"
+                        className={styles.clear}
+                        onClick={handleClearSearch}
+                    />
                 )}
             </div>
         </div>

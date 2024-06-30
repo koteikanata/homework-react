@@ -1,35 +1,15 @@
-import { useCallback } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { Rating } from '../rating/component';
+import { FilmRating } from '../film-rating/components';
 import type { Film } from '../../types';
 
 import styles from './styles.module.css';
 
 interface Props extends Film {
     href: string;
-    onUserRatingChange: (id: Film['id'], rating: number) => void;
-    userRating?: number;
 }
 
-export const FilmCard: React.FC<Props> = ({
-    id,
-    title,
-    description,
-    poster,
-    genre,
-    release_year,
-    href,
-    userRating,
-    onUserRatingChange,
-}) => {
-    const onUserRatingChangeCallback = useCallback(
-        (rating: number) => {
-            onUserRatingChange(id, rating);
-        },
-        [onUserRatingChange, id],
-    );
-
+export const FilmCard: React.FC<Props> = ({ id, title, description, poster, genre, release_year, href }) => {
     return (
         <div className={classNames(styles['film-card'])}>
             <Link to={href} className={styles.container}>
@@ -52,7 +32,7 @@ export const FilmCard: React.FC<Props> = ({
                     </div>
                 </div>
             </Link>
-            <Rating rating={userRating} onChange={onUserRatingChangeCallback} />
+            <FilmRating id={id} />
         </div>
     );
 };

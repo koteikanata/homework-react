@@ -4,8 +4,7 @@ import { MainPage } from './pages/main/MainPage';
 import { MoviePage } from './pages/movie/MoviePage';
 import { NotFoundPage } from './pages/not-found/NotFoundPage';
 
-export const buildPageUrl = (page?: number) =>
-    `/${page === undefined || page < 2 ? '' : page}`;
+export const buildPageUrl = (page?: number) => `/${page === undefined || page < 2 ? '' : page}`;
 
 export const App: React.FC = () => {
     return (

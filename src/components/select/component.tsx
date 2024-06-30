@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import styles from './styles.module.css';
 import classNames from 'classnames';
+import React from 'react';
 
 export interface BaseSelectItem {
     id: string;

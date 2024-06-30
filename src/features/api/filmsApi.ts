@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Film } from '../../types';
 
 interface GetFilmsParams {
-    title: Film['title'];
+    title?: Film['title'];
     genre?: Film['genre'];
     year?: Film['release_year'];
     page: number;
@@ -14,7 +14,7 @@ interface GetFilmsResponse {
 }
 
 interface GetFilmParams {
-    id: Film['id'];
+    id?: Film['id'];
 }
 
 interface LoginParams {
@@ -23,6 +23,12 @@ interface LoginParams {
 }
 
 interface LoginResponse {
+    token: string;
+}
+
+interface SendRatingParams {
+    id: Film['id'];
+    rating: number;
     token: string;
 }
 
@@ -52,11 +58,14 @@ export const filmsApi = createApi({
         getFilm: builder.query<Film, GetFilmParams>({
             query: ({ id }) => `/movie/${id}`,
         }),
-        sendRating: builder.mutation({
-            query: ({ id, rating }) => ({
+        sendRating: builder.mutation<{}, SendRatingParams>({
+            query: ({ id, rating, token }) => ({
                 url: '/rateMovie',
                 method: 'POST',
                 body: { movieId: id, user_rate: rating },
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
             }),
         }),
         login: builder.mutation<LoginResponse, LoginParams>({
@@ -69,4 +78,4 @@ export const filmsApi = createApi({
     }),
 });
 
-export const { useGetFilmsQuery, useGetFilmQuery, useLoginMutation } = filmsApi;
+export const { useGetFilmsQuery, useGetFilmQuery, useSendRatingMutation, useLoginMutation } = filmsApi;

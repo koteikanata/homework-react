@@ -1,18 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { buildPageUrl } from '../../App';
 import { Search } from '../../components/search/component';
 import { type BaseSelectItem, Select } from '../../components/select/component';
 import { FilmsList } from '../../components/films/component';
-import { Pagination } from '../../components/pagination/component';
-import { useGetFilmsQuery } from '../../features/api/filmsApi';
 import { useQuery } from '../../hooks';
 import { addQueryParams, resetPathname, transformConstantsToArray, transformConstantsToHash } from '../../utils';
 import { GENRES as GENRES_DATA, YEARS as YEARS_DATA } from '../../constants';
 
 import styles from './styles.module.css';
-import { Loader } from '../../components/loader/component';
-import NotFoundPage from '../not-found/NotFoundPage';
 
 const GENRES_ARRAY = transformConstantsToArray(GENRES_DATA);
 const YEARS_ARRAY = transformConstantsToArray(YEARS_DATA);
@@ -20,7 +15,7 @@ const YEARS_ARRAY = transformConstantsToArray(YEARS_DATA);
 const GENRES_HASH = transformConstantsToHash(GENRES_DATA);
 const YEARS_HASH = transformConstantsToHash(YEARS_DATA);
 
-const MainPage: React.FC = () => {
+export const MainPage: React.FC = () => {
     const { page: pageFromParam } = useParams<string>();
     const page = Number(pageFromParam) || 1;
 
@@ -64,38 +59,6 @@ const MainPage: React.FC = () => {
         [navigate],
     );
 
-    const { data, error, isLoading } = useGetFilmsQuery(
-        { page, title: searchQuery, genre: genre?.id, year: year?.id },
-        { refetchOnMountOrArgChange: true },
-    );
-
-    let Films: React.ReactElement | null = null;
-
-    if (isLoading) {
-        Films = (
-            <div>
-                <Loader />
-            </div>
-        );
-    } else if (error) {
-        Films = (
-            <div>
-                <NotFoundPage />
-            </div>
-        );
-    } else if (data) {
-        Films = (
-            <>
-                <FilmsList items={data.search_result}></FilmsList>
-                <Pagination
-                    page={page}
-                    prevLink={page > 1 ? buildPageUrl(page - 1) : undefined}
-                    nextLink={page < data.total_pages ? buildPageUrl(page + 1) : undefined}
-                />
-            </>
-        );
-    }
-
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [page]);
@@ -115,15 +78,13 @@ const MainPage: React.FC = () => {
                 </div>
                 <div className={styles.filter}>
                     <div className={styles['filter-title']}>Год выпуска</div>
-                    <Select items={YEARS_ARRAY} activeItem={year} placeholder="Выберите Год" onChange={onYearChange} />
+                    <Select items={YEARS_ARRAY} activeItem={year} placeholder="Выберите год" onChange={onYearChange} />
                 </div>
             </div>
             <div className={styles['films-container']}>
                 <Search onChange={onSearchQueryChange} />
-                {Films}
+                <FilmsList page={page} searchQuery={searchQuery} genre={genre?.id} year={year?.id} />
             </div>
         </div>
     );
 };
-
-export default MainPage;

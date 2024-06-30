@@ -8,27 +8,47 @@ import styles from './styles.module.css';
 
 interface Props {
     rating?: number;
+    readonly?: boolean;
     onChange: (value: number) => void;
+    onNonAuthRatingChange?: () => void;
 }
 
 const Star = <StarOutline fill="#ABABAB" />;
 const StarHovered = <StarFilled fill="#ABABAB" />;
 const StarActive = <StarFilled fill="#FF5500" />;
 
-export const Rating: React.FC<Props> = ({ onChange, rating = 0 }) => {
+export const Rating: React.FC<Props> = ({ onChange, readonly, onNonAuthRatingChange, rating = 0 }) => {
+    const [initial, setInitial] = useState(true);
     const [innerRating, setInnerRating] = useState(rating);
     const [hoveredItem, setHoveredItem] = useState<number>();
-    const debouncedRating = useDebounce(innerRating, 2000);
+    const debouncedRating = useDebounce(innerRating, 500);
 
     const stars = [];
 
-    useEffect(() => onChange(debouncedRating), [onChange, debouncedRating]);
+    const tryToChangeRating = (rating: number) => {
+        if (readonly) {
+            onNonAuthRatingChange && onNonAuthRatingChange();
+        } else {
+            setInnerRating(rating);
+        }
+    };
+
+    useEffect(() => {
+        if (initial) {
+            setInitial(false);
+            return;
+        }
+
+        onChange(debouncedRating);
+    }, [initial, onChange, debouncedRating]);
 
     for (let i = 0; i < 5; i++) {
         let icon = Star;
 
-        if (hoveredItem && i <= hoveredItem) {
-            icon = StarHovered;
+        if (hoveredItem !== undefined) {
+            if (i <= hoveredItem) {
+                icon = StarHovered;
+            }
         } else if (innerRating && i < innerRating) {
             icon = StarActive;
         }
@@ -37,15 +57,15 @@ export const Rating: React.FC<Props> = ({ onChange, rating = 0 }) => {
             <label
                 key={i + 1}
                 className={styles.item}
-                onMouseEnter={() => setHoveredItem(i)}
-                onMouseLeave={() => setHoveredItem(undefined)}
+                onMouseEnter={() => !readonly && setHoveredItem(i)}
+                onMouseLeave={() => !readonly && setHoveredItem(undefined)}
             >
                 <input
                     className={styles.input}
                     type="radio"
                     name="star"
                     value={i + 1}
-                    onChange={() => setInnerRating(i + 1)}
+                    onChange={() => tryToChangeRating(i + 1)}
                 />
                 <span className={styles.icon}>{icon}</span>
                 <span className={styles.text}>{i + 1}</span>

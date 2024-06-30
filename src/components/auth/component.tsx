@@ -17,7 +17,9 @@ export const Auth: React.FC<Props> = ({ onClose }) => {
                 onClose();
             }
         };
+
         document.addEventListener('mousedown', checkIfClickedOutside);
+
         return () => {
             document.removeEventListener('mousedown', checkIfClickedOutside);
         };
@@ -37,7 +39,7 @@ export const Auth: React.FC<Props> = ({ onClose }) => {
             <div className={styles.modal} ref={ref} onMouseDown={(e) => e.stopPropagation()}>
                 <div className={styles.header}>
                     <p>Авторизация</p>
-                    <img src="../../assets/close.svg" alt="Закрыть" className={styles.close} onClick={onClose} />
+                    <img src="./src/assets/close.svg" alt="Закрыть" className={styles.close} onClick={onClose} />
                 </div>
                 <AuthForm onClose={onClose} />
             </div>

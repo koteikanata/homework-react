@@ -1,28 +1,21 @@
 import { useSearchParams } from 'react-router-dom';
-import { useGetFilmQuery } from '../../features/api/filmsApi';
-import type { Film } from '../../types';
-import { Rating } from '../../components/rating/component';
 import classNames from 'classnames';
+import { useGetFilmQuery } from '../../features/api/filmsApi';
 import { Loader } from '../../components/loader/component';
-import NotFoundPage from '../not-found/NotFoundPage';
+import { NotFoundPage } from '../not-found/NotFoundPage';
+import { FilmRating } from '../../components/film-rating/components';
 import { Actors } from '../../components/slider/component';
-import { useLocalStorage } from '../../hooks';
 
 import styles from './styles.module.css';
 
-const MoviePage: React.FC = () => {
-    const [ratingsHash, setRatingsHash] = useLocalStorage<Record<Film['id'], number>>('films-rating', {});
+export const MoviePage: React.FC = () => {
     const [searchParams] = useSearchParams();
-    const id = searchParams.get('id');
+    const id = searchParams.get('id') || undefined;
 
-    if (!id) return <NotFoundPage />;
-
-    const { data: film, error, isLoading } = useGetFilmQuery({ id });
+    const { data: film, error, isLoading } = useGetFilmQuery({ id }, { skip: id === undefined });
 
     if (isLoading) return <Loader />;
-    if (!film || error) return <NotFoundPage />;
-
-    const rating = ratingsHash[film.id];
+    if (!id || !film || error) return <NotFoundPage />;
 
     return (
         <>
@@ -47,11 +40,9 @@ const MoviePage: React.FC = () => {
                         <p className={styles.text}>{film.description}</p>
                     </div>
                 </div>
-                <Rating rating={rating} onChange={(v) => console.log(v)} />
+                <FilmRating id={id} />
             </div>
             <Actors actors={film.actors} />
         </>
     );
 };
-
-export MoviePage;
