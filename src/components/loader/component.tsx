@@ -1,13 +1,13 @@
 import styles from './styles.module.css';
 
+import Loading from '../../assets/loading.svg?react';
+
+const loadingIcon = <Loading />;
+
 export const Loader = () => {
     return (
         <div className={styles['loader-container']}>
-            <img
-                className={styles.loader}
-                src="../../../public/loading.svg"
-                alt="Загрузка..."
-            />
+            <div className={styles.loader}>{loadingIcon}</div>
         </div>
     );
 };

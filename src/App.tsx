@@ -1,8 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Layout } from './components/layout/component';
-import MainPage from './pages/main/MainPage';
-import NotFoundPage from './pages/not-found/NotFoundPage';
-import MoviePage from './pages/movie/MoviePage';
+import { MainPage } from './pages/main/MainPage';
+import { MoviePage } from './pages/movie/MoviePage';
+import { NotFoundPage } from './pages/not-found/NotFoundPage';
 
 export const buildPageUrl = (page?: number) =>
     `/${page === undefined || page < 2 ? '' : page}`;

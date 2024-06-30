@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.css';
 
@@ -22,8 +22,7 @@ export const Actors: React.FC<Props> = ({ actors }) => {
 
     const checkScrollPosition = () => {
         if (containerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } =
-                containerRef.current;
+            const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
             setShowLeftButton(scrollLeft > 0);
             setShowRightButton(scrollLeft + clientWidth < scrollWidth);
         }
@@ -31,10 +30,10 @@ export const Actors: React.FC<Props> = ({ actors }) => {
 
     useEffect(() => {
         checkScrollPosition();
-        const handleScroll = () => checkScrollPosition();
         const container = containerRef.current;
-        container?.addEventListener('scroll', handleScroll);
-        return () => container?.removeEventListener('scroll', handleScroll);
+        container?.addEventListener('scroll', checkScrollPosition);
+
+        return () => container?.removeEventListener('scroll', checkScrollPosition);
     }, []);
 
     return (
@@ -42,31 +41,18 @@ export const Actors: React.FC<Props> = ({ actors }) => {
             <h2 className={styles['actor-header']}>Актёры</h2>
             <div className={styles['actor-slider']}>
                 {showLeftButton && (
-                    <button
-                        className={classNames(styles.button, styles.left)}
-                        onClick={() => handleClick(-300)}
-                    />
+                    <button className={classNames(styles.button, styles.left)} onClick={() => handleClick(-300)} />
                 )}
                 <div className={styles['actor-container']} ref={containerRef}>
                     {actors.map(({ name, photo }, i) => (
-                        <div
-                            key={`${name}-${i}`}
-                            className={styles['actor-card']}
-                        >
-                            <img
-                                src={photo}
-                                width={160}
-                                className={styles['actor-image']}
-                            />
+                        <div key={`${name}-${i}`} className={styles['actor-card']}>
+                            <img src={photo} width={160} className={styles['actor-image']} />
                             <p>{name}</p>
                         </div>
                     ))}
                 </div>
                 {showRightButton && (
-                    <button
-                        className={classNames(styles.button, styles.right)}
-                        onClick={() => handleClick(300)}
-                    />
+                    <button className={classNames(styles.button, styles.right)} onClick={() => handleClick(300)} />
                 )}
             </div>
         </>

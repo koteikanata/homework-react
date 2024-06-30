@@ -57,22 +57,12 @@ export const AuthForm: React.FC<Props> = ({ onClose }) => {
             <div className={styles['button-container']}>
                 <button
                     type="submit"
-                    className={classNames(
-                        styles['button-login'],
-                        styles.button,
-                    )}
+                    className={classNames(styles['button-login'], styles.button)}
                     disabled={isLoading}
                 >
                     Войти
                 </button>
-                <button
-                    type="button"
-                    className={classNames(
-                        styles['button-cancel'],
-                        styles.button,
-                    )}
-                    onClick={onClose}
-                >
+                <button type="button" className={classNames(styles['button-cancel'], styles.button)} onClick={onClose}>
                     Отменить
                 </button>
             </div>

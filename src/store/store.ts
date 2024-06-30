@@ -7,8 +7,7 @@ export const store = configureStore({
         [filmsApi.reducerPath]: filmsApi.reducer,
         auth: authReducer,
     },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(filmsApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(filmsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

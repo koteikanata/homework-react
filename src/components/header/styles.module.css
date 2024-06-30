@@ -45,7 +45,7 @@
 }
 
 .avatar {
-    background-image: url(../../../public/avatar.svg);
+    background-image: url('../../assets/avatar.svg');
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;

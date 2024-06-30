@@ -15,12 +15,7 @@ interface Props<T extends BaseSelectItem> {
     onChange: (value: T) => void;
 }
 
-const SelectBase = <T extends BaseSelectItem>({
-    activeItem,
-    items,
-    placeholder,
-    onChange,
-}: Props<T>) => {
+const SelectBase = <T extends BaseSelectItem>({ activeItem, items, placeholder, onChange }: Props<T>) => {
     const [opened, setOpened] = useState(false);
     const toggleOpenedState = () => setOpened(!opened);
     const resetOpenedState = () => setOpened(false);
@@ -62,8 +57,7 @@ const SelectBase = <T extends BaseSelectItem>({
                             return (
                                 <li
                                     className={classNames(styles.item, {
-                                        [styles.item_active]:
-                                            item === activeItem,
+                                        [styles.item_active]: item === activeItem,
                                     })}
                                     key={item.id}
                                     onClick={onClick}

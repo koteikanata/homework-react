@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import StarFilled from '../../../public/star-filled.svg?react';
-import StarOutline from '../../../public/star-outline.svg?react';
+import StarFilled from '../../assets/star-filled.svg?react';
+import StarOutline from '../../assets/star-outline.svg?react';
 import { useDebounce } from '../../hooks';
 
 import styles from './styles.module.css';

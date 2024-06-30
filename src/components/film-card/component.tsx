@@ -23,21 +23,18 @@ export const FilmCard: React.FC<Props> = ({
     userRating,
     onUserRatingChange,
 }) => {
-    const onUserRatingChangeCallback = useCallback((rating: number) => {
-        onUserRatingChange(id, rating);
-    }, [onUserRatingChange, id]);
+    const onUserRatingChangeCallback = useCallback(
+        (rating: number) => {
+            onUserRatingChange(id, rating);
+        },
+        [onUserRatingChange, id],
+    );
 
     return (
         <div className={classNames(styles['film-card'])}>
             <Link to={href} className={styles.container}>
                 <div className={styles.container}>
-                    <img
-                        src={poster}
-                        alt={`Постер ${title}`}
-                        width={100}
-                        height={120}
-                        className={styles.image}
-                    />
+                    <img src={poster} alt={`Постер ${title}`} width={100} height={120} className={styles.image} />
                     <div className={styles.body}>
                         <p className={styles.title}>{title}</p>
                         <div className={styles.text}>
@@ -55,10 +52,7 @@ export const FilmCard: React.FC<Props> = ({
                     </div>
                 </div>
             </Link>
-            <Rating
-                rating={userRating}
-                onChange={onUserRatingChangeCallback}
-            />
+            <Rating rating={userRating} onChange={onUserRatingChangeCallback} />
         </div>
     );
 };

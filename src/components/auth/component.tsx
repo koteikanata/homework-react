@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { AuthForm } from '../auth-form/component';
 
 import styles from './styles.module.css';
@@ -34,19 +34,10 @@ export const Auth: React.FC<Props> = ({ onClose }) => {
 
     return ReactDOM.createPortal(
         <div className={styles['modal-container']}>
-            <div
-                className={styles.modal}
-                ref={ref}
-                onMouseDown={(e) => e.stopPropagation()}
-            >
+            <div className={styles.modal} ref={ref} onMouseDown={(e) => e.stopPropagation()}>
                 <div className={styles.header}>
                     <p>Авторизация</p>
-                    <img
-                        src="../../../public/close.svg"
-                        alt="Закрыть"
-                        className={styles.close}
-                        onClick={onClose}
-                    />
+                    <img src="../../assets/close.svg" alt="Закрыть" className={styles.close} onClick={onClose} />
                 </div>
                 <AuthForm onClose={onClose} />
             </div>

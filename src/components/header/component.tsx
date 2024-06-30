@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import { Auth } from '../auth/component';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { logout, setTokenFromStorage } from '../../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -10,9 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector(
-        (state: RootState) => state.auth.isAuthenticated,
-    );
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,25 +38,13 @@ export const Header = () => {
                 Фильмопоиск
             </h1>
             {!isAuthenticated ? (
-                <button
-                    className={classNames(
-                        styles.button,
-                        styles['button-login'],
-                    )}
-                    onClick={handleOpenModal}
-                >
+                <button className={classNames(styles.button, styles['button-login'])} onClick={handleOpenModal}>
                     Войти
                 </button>
             ) : (
                 <div className={styles['logedin-container']}>
                     <span className={styles.avatar}></span>
-                    <button
-                        className={classNames(
-                            styles.button,
-                            styles['button-logout'],
-                        )}
-                        onClick={handleLogout}
-                    >
+                    <button className={classNames(styles.button, styles['button-logout'])} onClick={handleLogout}>
                         Выйти
                     </button>
                 </div>

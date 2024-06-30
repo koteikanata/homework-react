@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { buildPageUrl } from '../../App';
 import { Search } from '../../components/search/component';
@@ -7,12 +7,7 @@ import { FilmsList } from '../../components/films/component';
 import { Pagination } from '../../components/pagination/component';
 import { useGetFilmsQuery } from '../../features/api/filmsApi';
 import { useQuery } from '../../hooks';
-import {
-    addQueryParams,
-    resetPathname,
-    transformConstantsToArray,
-    transformConstantsToHash,
-} from '../../utils';
+import { addQueryParams, resetPathname, transformConstantsToArray, transformConstantsToHash } from '../../utils';
 import { GENRES as GENRES_DATA, YEARS as YEARS_DATA } from '../../constants';
 
 import styles from './styles.module.css';
@@ -95,11 +90,7 @@ const MainPage: React.FC = () => {
                 <Pagination
                     page={page}
                     prevLink={page > 1 ? buildPageUrl(page - 1) : undefined}
-                    nextLink={
-                        page < data.total_pages
-                            ? buildPageUrl(page + 1)
-                            : undefined
-                    }
+                    nextLink={page < data.total_pages ? buildPageUrl(page + 1) : undefined}
                 />
             </>
         );
@@ -110,35 +101,28 @@ const MainPage: React.FC = () => {
     }, [page]);
 
     return (
-            <div className={styles.container}>
-                <div className={styles.filters}>
-                    <div className={styles['filters-title']}>Фильтр</div>
-                    <div className={styles.filter}>
-                        <div className={styles['filter-title']}>Жанр</div>
-                        <Select
-                            items={GENRES_ARRAY}
-                            activeItem={genre}
-                            placeholder="Выберите жанр"
-                            onChange={onGenreChange}
-                        />
-                    </div>
-                    <div className={styles.filter}>
-                        <div className={styles['filter-title']}>
-                            Год выпуска
-                        </div>
-                        <Select
-                            items={YEARS_ARRAY}
-                            activeItem={year}
-                            placeholder="Выберите Год"
-                            onChange={onYearChange}
-                        />
-                    </div>
+        <div className={styles.container}>
+            <div className={styles.filters}>
+                <div className={styles['filters-title']}>Фильтр</div>
+                <div className={styles.filter}>
+                    <div className={styles['filter-title']}>Жанр</div>
+                    <Select
+                        items={GENRES_ARRAY}
+                        activeItem={genre}
+                        placeholder="Выберите жанр"
+                        onChange={onGenreChange}
+                    />
                 </div>
-                <div className={styles['films-container']}>
-                    <Search onChange={onSearchQueryChange} />
-                    {Films}
+                <div className={styles.filter}>
+                    <div className={styles['filter-title']}>Год выпуска</div>
+                    <Select items={YEARS_ARRAY} activeItem={year} placeholder="Выберите Год" onChange={onYearChange} />
                 </div>
             </div>
+            <div className={styles['films-container']}>
+                <Search onChange={onSearchQueryChange} />
+                {Films}
+            </div>
+        </div>
     );
 };
 

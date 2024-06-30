@@ -14,7 +14,7 @@
 }
 
 .input-container::before {
-    content: url(../../../public/search.svg);
+    content: url('../../assets/search.svg');
     position: absolute;
     top: 12px;
     left: 12px;

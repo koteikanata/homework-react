@@ -18,7 +18,7 @@
 }
 
 .input::before {
-    content: url(../../assets/icons/arrow-square-up.svg);
+    content: url(../../assets/arrow-square-up.svg);
     width: 20px;
     height: 20px;
     position: absolute;

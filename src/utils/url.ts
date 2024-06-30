@@ -6,10 +6,7 @@ export const resetPathname = (url: string) => {
     return `/${parsed.search}`;
 };
 
-export const addQueryParams = (
-    url: string,
-    params: Record<string, string | undefined>,
-) => {
+export const addQueryParams = (url: string, params: Record<string, string | undefined>) => {
     const parsed = new URL(url);
 
     Object.entries(params).forEach(([key, value]) => {

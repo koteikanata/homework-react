@@ -12,15 +12,9 @@ export const Pagination: React.FC<Props> = ({ page, prevLink, nextLink }) => {
     return (
         <footer className={styles.footer}>
             {prevLink ? (
-                <Link
-                    to={prevLink}
-                    className={classNames(styles.button, styles.button_rotated)}
-                />
+                <Link to={prevLink} className={classNames(styles.button, styles.button_rotated)} />
             ) : (
-                <button
-                    className={classNames(styles.button, styles.button_rotated)}
-                    disabled={true}
-                />
+                <button className={classNames(styles.button, styles.button_rotated)} disabled={true} />
             )}
             <span>{page}</span>
             {nextLink ? (

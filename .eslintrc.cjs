@@ -27,6 +27,7 @@ module.exports = {
     "semi": ["warn", "always"], // проверка точек с запятой всегда
     "@typescript-eslint/no-unused-vars": "warn",
     "react-hooks/rules-of-hooks": "error",
-    "@typescript-eslint/consistent-type-definitions": "error"
+    "@typescript-eslint/consistent-type-definitions": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
   },
 }

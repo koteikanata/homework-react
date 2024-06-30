@@ -19,11 +19,11 @@
 .button:disabled {
     background-color: #e9eaed;
     cursor: default;
-    background-image: url(../../../public/arrow-pag-disabled.svg);
+    background-image: url(../../assets/arrow-pag-disabled.svg);
 }
 
 .button:not(:disabled) {
-    background-image: url(../../../public/arrow-pag.svg);
+    background-image: url(../../assets/arrow-pag.svg);
 }
 
 .button_rotated {

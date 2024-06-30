@@ -5,15 +5,13 @@ import { Rating } from '../../components/rating/component';
 import classNames from 'classnames';
 import { Loader } from '../../components/loader/component';
 import NotFoundPage from '../not-found/NotFoundPage';
-import { Actors } from '../../components/actors/component';
+import { Actors } from '../../components/slider/component';
 import { useLocalStorage } from '../../hooks';
 
 import styles from './styles.module.css';
 
 const MoviePage: React.FC = () => {
-    const [ratingsHash, setRatingsHash] = useLocalStorage<
-        Record<Film['id'], number>
-    >('films-rating', {});
+    const [ratingsHash, setRatingsHash] = useLocalStorage<Record<Film['id'], number>>('films-rating', {});
     const [searchParams] = useSearchParams();
     const id = searchParams.get('id');
 
@@ -30,20 +28,9 @@ const MoviePage: React.FC = () => {
         <>
             <div className={styles['film-card']}>
                 <div className={styles.body}>
-                    <img
-                        src={film.poster}
-                        alt={film.title}
-                        className={styles.image}
-                    />
+                    <img src={film.poster} alt={film.title} className={styles.image} />
                     <div className={styles['text-content']}>
-                        <h1
-                            className={classNames(
-                                styles.title,
-                                styles['bold-text'],
-                            )}
-                        >
-                            {film.title}
-                        </h1>
+                        <h1 className={classNames(styles.title, styles['bold-text'])}>{film.title}</h1>
                         <p className={styles.text}>
                             <b>Жанр: </b>
                             {film.genre}
@@ -56,14 +43,7 @@ const MoviePage: React.FC = () => {
                             <b>Рейтинг: </b>
                             {film.rating}
                         </p>
-                        <p
-                            className={classNames(
-                                styles.text,
-                                styles['bold-text'],
-                            )}
-                        >
-                            Описание
-                        </p>
+                        <p className={classNames(styles.text, styles['bold-text'])}>Описание</p>
                         <p className={styles.text}>{film.description}</p>
                     </div>
                 </div>
@@ -74,4 +54,4 @@ const MoviePage: React.FC = () => {
     );
 };
 
-export default MoviePage;
+export MoviePage;
