@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import StarFilled from '../../assets/star-filled.svg?react';
 import StarOutline from '../../assets/star-outline.svg?react';
-import { useDebounce } from '../../hooks';
 
 import styles from './styles.module.css';
+import useDebouncedCallback from '../../hooks/useDebouncedCallback';
 
 interface Props {
     rating?: number;
@@ -18,29 +18,21 @@ const StarHovered = <StarFilled fill="#ABABAB" />;
 const StarActive = <StarFilled fill="#FF5500" />;
 
 export const Rating: React.FC<Props> = ({ onChange, readonly, onNonAuthRatingChange, rating = 0 }) => {
-    const [initial, setInitial] = useState(true);
     const [innerRating, setInnerRating] = useState(rating);
     const [hoveredItem, setHoveredItem] = useState<number>();
-    const debouncedRating = useDebounce(innerRating, 500);
 
     const stars = [];
 
-    const tryToChangeRating = (rating: number) => {
+    const debouncedCallback = useDebouncedCallback((rating: number) => onChange(rating), 500);
+
+    const onTryToChangeRating = (rating: number) => {
         if (readonly) {
             onNonAuthRatingChange && onNonAuthRatingChange();
         } else {
             setInnerRating(rating);
+            debouncedCallback(rating);
         }
     };
-
-    useEffect(() => {
-        if (initial) {
-            setInitial(false);
-            return;
-        }
-
-        onChange(debouncedRating);
-    }, [initial, onChange, debouncedRating]);
 
     for (let i = 0; i < 5; i++) {
         let icon = Star;
@@ -65,7 +57,7 @@ export const Rating: React.FC<Props> = ({ onChange, readonly, onNonAuthRatingCha
                     type="radio"
                     name="star"
                     value={i + 1}
-                    onChange={() => tryToChangeRating(i + 1)}
+                    onChange={() => onTryToChangeRating(i + 1)}
                 />
                 <span className={styles.icon}>{icon}</span>
                 <span className={styles.text}>{i + 1}</span>

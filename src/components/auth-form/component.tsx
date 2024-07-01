@@ -21,6 +21,7 @@ export const AuthForm: React.FC<Props> = ({ onClose }) => {
             const { token } = await login({ username, password }).unwrap();
             dispatch(setCredentials({ token }));
             onClose();
+            window.location.reload();
         } catch (err) {
             console.error('Failed to login', err);
         }

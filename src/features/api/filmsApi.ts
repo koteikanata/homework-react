@@ -58,7 +58,7 @@ export const filmsApi = createApi({
         getFilm: builder.query<Film, GetFilmParams>({
             query: ({ id }) => `/movie/${id}`,
         }),
-        sendRating: builder.mutation<{}, SendRatingParams>({
+        sendRating: builder.mutation<Record<string, string>, SendRatingParams>({
             query: ({ id, rating, token }) => ({
                 url: '/rateMovie',
                 method: 'POST',

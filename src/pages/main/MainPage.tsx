@@ -33,12 +33,13 @@ export const MainPage: React.FC = () => {
         navigate(resetPathname(window.location.href));
     }, [navigate]);
 
+    useEffect(resetPageNumber, [searchQuery]);
+
     const onSearchQueryChange = useCallback(
         (query: string) => {
-            resetPageNumber();
             setSearchQuery(query);
         },
-        [resetPageNumber, setSearchQuery],
+        [setSearchQuery],
     );
 
     const onGenreChange = useCallback(

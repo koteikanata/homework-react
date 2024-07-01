@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface AuthState {
     isAuthenticated: boolean;
@@ -25,6 +26,7 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
             state.token = null;
             localStorage.removeItem('token');
+            window.location.reload();
         },
         setTokenFromStorage: (state, { payload: token }: PayloadAction<string | null>) => {
             if (token) {

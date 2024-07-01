@@ -26,7 +26,10 @@ export const Header = () => {
     const handleTitleClick = () => navigate('/');
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
-    const handleLogout = () => dispatch(logout());
+    const handleLogout = () => {
+        dispatch(logout());
+        window.location.reload();
+    };
 
     if (isLoading) {
         return null;
